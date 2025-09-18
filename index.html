@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <title>Gaussian Flow Bridges for audio domain transfer with unpaired data</title>
+    <title>SALAD-VAE: Semantic Audio Compression with Language-Audio Distillation</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -44,9 +44,16 @@
             <h2>Abstract</h2>
             <hr>
             <p>
-                Modern generative and multimodal models increasingly rely on compact latent  representations that trade and balance semantic richness with high-fidelity reconstruction. We introduce SALAD-VAE, a continuous and highly compact semantic Audio Variational Autoencoder, which operates in the frequency domain and achieves state-of-the-art compression with very low latent frame rate (7.8 Hz) while surfacing semantic structure and producing high audio quality. We enhance the standard VAE semantic losses and augmentation, specifically contrastive learning and CLAP-based embedding distillation, enabling it to generalize across diverse audio domains. With a significantly less computational complex architecture than comparable state-of-the-art VAEs, SALAD-VAE matches their reconstruction quality while it consistently outperforms them on a wide range of classification benchmarks. Furthermore, the proposed additional loss function provides a trained CLAP projection layer, which can be used zero-shot audio captioning and classification matching pretrained CLAP audio-text embeddings.
+                Modern generative and multimodal models increasingly rely on compact latent representations that trade and balance semantic richness with high-fidelity reconstruction. We introduce SALAD-VAE, a continuous and highly compact semantic Audio Variational Autoencoder, which operates in the frequency domain and achieves state-of-the-art compression with very low latent frame rate (7.8 Hz) while surfacing semantic structure and producing high audio quality. We enhance the standard VAE semantic losses and augmentation, specifically contrastive learning and CLAP-based embedding distillation, enabling it to generalize across diverse audio domains. With a significantly less computational complex architecture than comparable state-of-the-art VAEs, SALAD-VAE matches their reconstruction quality while it consistently outperforms them on a wide range of classification benchmarks. Furthermore, the proposed additional loss function provides a trained CLAP projection layer, which can be used zero-shot audio captioning and classification matching pretrained CLAP audio-text embeddings.
             </p>
             <br>
+            <br>
+            <img class="img-fluid" src="img/main_results.png">
+            <br>
+            <br>
+            <p class="text-center">Figure 1: <em>
+                Main results: SALAD-VAE provides state-of-the-art audio compression and reconstruction quality at a very low latent frame rate of 7.8 Hz, while surfacing semantic structure in its latent space. It outperforms competing models on a wide range of classification benchmarks, despite its significantly lower computational complexity. Additionally, the proposed CLAP-based loss provides a trained CLAP projection layer, which can be used for zero-shot audio captioning and classification.
+            </em></p>
         </div>
     </div>
 
@@ -64,86 +71,369 @@
 
         <table class="table table-sm text-center" style="vertical-align: middle;">
             <tr>
+                <th class="text-col">Description</th>
                 <th class="audio-col">Original</th>
                 <th class="audio-col">StableAudio VAE</th>
                 <th class="audio-col">Music2Latent</th>
-                <th class="audio-col">SALAD-VAE D=64</th>
-                <th class="audio-col">SALAD-VAE D=128</th>
-                <th class="audio-col">SALAD-VAE large D=128</th>
+                <th class="audio-col">SALAD D=64</th>
+                <th class="audio-col">SALAD large D=128</th>
+                <th class="audio-col">SALAD large D=128<br> no semantic losses</th>
             </tr>
 
             <tr>
+                <td>funk music</td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="original/0-weu-d1-2a17314e3ad73b20605dbcdb20473f06.1_10_10.wav" type="audio/wav">
+                        <source src="audio/original/039605.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="stableAudioVAE/0-weu-d1-2a17314e3ad73b20605dbcdb20473f06.1_10_10.wav" type="audio/wav">
+                        <source src="audio/stableAudioVAE/039605.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="mvae-v2m-ccmae1p03p-klw5e-3-ccmae1p03p-tfb100-claplin-contr-mbganmres-b64r3/0-weu-d1-2a17314e3ad73b20605dbcdb20473f06.1_10_10.wav" type="audio/wav">
+                        <source src="audio/music2latent/039605.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="samples/dereverberation/1_COT_coupling.wav" type="audio/wav">
+                        <source src="audio/mvae-v2os-claplin-contr-ganmbmres/039605.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="samples/dereverberation/1_CRUSE.wav" type="audio/wav">
+                        <source src="audio/mvae-v2m-claplin-contr-mbganmres/039605.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="samples/dereverberation/1_STORM.wav" type="audio/wav">
+                        <source src="audio/mvae-v2m-ganmbmres/039605.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+
+            <tr>
+                <td>acoustic music</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/original/080766.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/stableAudioVAE/080766.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/music2latent/080766.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2os-claplin-contr-ganmbmres/080766.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-claplin-contr-mbganmres/080766.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-ganmbmres/080766.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+
+            <tr>
+                <td>speech and <br> door shutting</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/original/ms_realrec_english_WindowsPC_A1XHIJBFIC5AQY_Door_shutting_fileid_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/stableAudioVAE/ms_realrec_english_WindowsPC_A1XHIJBFIC5AQY_Door_shutting_fileid_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/music2latent/ms_realrec_english_WindowsPC_A1XHIJBFIC5AQY_Door_shutting_fileid_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2os-claplin-contr-ganmbmres/ms_realrec_english_WindowsPC_A1XHIJBFIC5AQY_Door_shutting_fileid_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-claplin-contr-mbganmres/ms_realrec_english_WindowsPC_A1XHIJBFIC5AQY_Door_shutting_fileid_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-ganmbmres/ms_realrec_english_WindowsPC_A1XHIJBFIC5AQY_Door_shutting_fileid_4.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+
+            <tr>
+                <td>bandpassed speech</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/original/0-weu-d1-2a17314e3ad73b20605dbcdb20473f06.1_10_10.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/stableAudioVAE/0-weu-d1-2a17314e3ad73b20605dbcdb20473f06.1_10_10.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/music2latent/0-weu-d1-2a17314e3ad73b20605dbcdb20473f06.1_10_10.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2os-claplin-contr-ganmbmres/0-weu-d1-2a17314e3ad73b20605dbcdb20473f06.1_10_10.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-claplin-contr-mbganmres/0-weu-d1-2a17314e3ad73b20605dbcdb20473f06.1_10_10.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-ganmbmres/0-weu-d1-2a17314e3ad73b20605dbcdb20473f06.1_10_10.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
             </tr>
             <tr>
+                <td>distorted speech</td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="samples/dereverberation/2_dry.wav" type="audio/wav">
+                        <source src="audio/original/37f2be27-92a3-449b-a2d3-49c59248ca7e.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="samples/dereverberation/2_reverb.wav" type="audio/wav">
+                        <source src="audio/stableAudioVAE/37f2be27-92a3-449b-a2d3-49c59248ca7e.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="samples/dereverberation/2_indep_coupling.wav" type="audio/wav">
+                        <source src="audio/music2latent/37f2be27-92a3-449b-a2d3-49c59248ca7e.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="samples/dereverberation/2_COT_coupling.wav" type="audio/wav">
+                        <source src="audio/mvae-v2os-claplin-contr-ganmbmres/37f2be27-92a3-449b-a2d3-49c59248ca7e.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="samples/dereverberation/2_CRUSE.wav" type="audio/wav">
+                        <source src="audio/mvae-v2m-claplin-contr-mbganmres/37f2be27-92a3-449b-a2d3-49c59248ca7e.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
                 <td>
                     <audio controls="controls" class="player" preload="metadata">
-                        <source src="samples/dereverberation/2_STORM.wav" type="audio/wav">
+                        <source src="audio/mvae-v2m-ganmbmres/37f2be27-92a3-449b-a2d3-49c59248ca7e.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+
+            <tr>
+                <td>crowd</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/original/crowd.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/stableAudioVAE/crowd.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/music2latent/crowd.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2os-claplin-contr-ganmbmres/crowd.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-claplin-contr-mbganmres/crowd.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-ganmbmres/crowd.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+
+            <tr>
+                <td>glass breaking</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/original/glass_breaking.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/stableAudioVAE/glass_breaking.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/music2latent/glass_breaking.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2os-claplin-contr-ganmbmres/glass_breaking.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-claplin-contr-mbganmres/glass_breaking.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-ganmbmres/glass_breaking.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+
+            <tr>
+                <td>violin</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/original/violin.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/stableAudioVAE/violin.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/music2latent/violin.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2os-claplin-contr-ganmbmres/violin.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-claplin-contr-mbganmres/violin.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-ganmbmres/violin.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+            </tr>
+
+            <tr>
+                <td>rustle</td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/original/rustle.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/stableAudioVAE/rustle.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/music2latent/rustle.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2os-claplin-contr-ganmbmres/rustle.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-claplin-contr-mbganmres/rustle.wav" type="audio/wav">
+                        Unsupported browser.
+                    </audio>
+                </td>
+                <td>
+                    <audio controls="controls" class="player" preload="metadata">
+                        <source src="audio/mvae-v2m-ganmbmres/rustle.wav" type="audio/wav">
                         Unsupported browser.
                     </audio>
                 </td>
